@@ -14,7 +14,7 @@ const Admin = () => {
     const [editPoints, setEditPoints] = useState(0);
 
     const API_URL = process.env.NODE_ENV === "production" 
-        ? "https://my-backend.onrender.com"
+        ? "https://boardgame-final.onrender.com"
         : "http://localhost:3001";
 
     useEffect(() => {
@@ -225,5 +225,6 @@ const Admin = () => {
         </div>
     );
 };
+
 
 export default Admin;
