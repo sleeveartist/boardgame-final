@@ -31,7 +31,7 @@ export default function Boardgame() {
     const navigate = useNavigate()
 
     const API_URL = process.env.NODE_ENV === "production" 
-        ? "https://my-backend.onrender.com"
+        ? "https://boardgame-final.onrender.com"
         : "http://localhost:3001";
 
     useEffect(() => {
@@ -155,4 +155,5 @@ export default function Boardgame() {
         </div>
         </>
     )
+
 }
