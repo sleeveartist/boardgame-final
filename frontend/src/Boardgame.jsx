@@ -92,21 +92,21 @@ export default function Boardgame() {
             setTaskName(randomTask.taskName);
             setTaskDescription(randomTask.taskDescription);
             setShowStopwatch(randomTask.stopwatch || false)
-        } else if (dice > 9 && dice < 13) {
+        } else if (dice > 9 && dice < 14) {
             setDiceImage(diceFour);
             await new Promise(resolve => setTimeout(resolve, 0));
             const randomTask = fourTasks[Math.floor(Math.random() * fourTasks.length)];
             setTaskName(randomTask.taskName);
             setTaskDescription(randomTask.taskDescription);
             setShowStopwatch(randomTask.stopwatch || false)
-        } else if (dice > 12 && dice < 16) {
+        } else if (dice > 13 && dice < 17) {
             setDiceImage(diceFive);
             await new Promise(resolve => setTimeout(resolve, 0));
             const randomTask = fiveSixTasks[Math.floor(Math.random() * fiveSixTasks.length)];
             setTaskName(randomTask.taskName);
             setTaskDescription(randomTask.taskDescription);
             setShowStopwatch(randomTask.stopwatch || false)
-        } else if (dice > 15 && dice < 19) {
+        } else if (dice > 16 && dice < 19) {
             setDiceImage(diceSix);
             await new Promise(resolve => setTimeout(resolve, 0));
             const randomTask = fiveSixTasks[Math.floor(Math.random() * fiveSixTasks.length)];
@@ -157,3 +157,4 @@ export default function Boardgame() {
     )
 
 }
+
