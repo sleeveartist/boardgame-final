@@ -73,6 +73,31 @@ app.get("/health", (req,res) => {
     res.json({status: "ok", timestamp: new Date().toISOString()})
 })
 
+// Self-pinging function
+const keepAlive = () => {
+    const INTERVAL = 10 * 60 * 1000; // 10 minutes (Render sleeps after 15 mins)
+    
+    setInterval(async () => {
+        try {
+            const response = await fetch(`http://localhost:${PORT}/ping`);
+            console.log(`Ping sent at ${new Date().toISOString()}`);
+        } catch (error) {
+            console.log('Ping failed:', error.message);
+        }
+    }, INTERVAL);
+    
+    console.log('Keep-alive service started');
+};
+
+// Ping endpoint
+app.get('/ping', (req, res) => {
+    res.json({ 
+        status: 'alive', 
+        timestamp: new Date().toISOString() 
+    });
+});
+
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`)
+    keepAlive()
 })
