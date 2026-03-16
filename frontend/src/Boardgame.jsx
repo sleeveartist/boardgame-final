@@ -73,42 +73,42 @@ export default function Boardgame() {
         
         if (dice > 0 && dice < 4) {
             setDiceImage(diceOne);
-            await new Promise(resolve => setTimeout(resolve, 0));
+            await new Promise(resolve => setTimeout(resolve, 50));
             const randomTask = oneTasks[Math.floor(Math.random() * oneTasks.length)];
             setTaskName(randomTask.taskName);
             setTaskDescription(randomTask.taskDescription);
             setShowStopwatch(randomTask.stopwatch || false)
         } else if (dice > 3 && dice < 7) {
             setDiceImage(diceTwo);
-            await new Promise(resolve => setTimeout(resolve, 0));
+            await new Promise(resolve => setTimeout(resolve, 50));
             const randomTask = twoThreeTasks[Math.floor(Math.random() * twoThreeTasks.length)];
             setTaskName(randomTask.taskName);
             setTaskDescription(randomTask.taskDescription);
             setShowStopwatch(randomTask.stopwatch || false)
         } else if (dice > 6 && dice < 10) {
             setDiceImage(diceThree);
-            await new Promise(resolve => setTimeout(resolve, 0));
+            await new Promise(resolve => setTimeout(resolve, 50));
             const randomTask = twoThreeTasks[Math.floor(Math.random() * twoThreeTasks.length)];
             setTaskName(randomTask.taskName);
             setTaskDescription(randomTask.taskDescription);
             setShowStopwatch(randomTask.stopwatch || false)
         } else if (dice > 9 && dice < 14) {
             setDiceImage(diceFour);
-            await new Promise(resolve => setTimeout(resolve, 0));
+            await new Promise(resolve => setTimeout(resolve, 50));
             const randomTask = fourTasks[Math.floor(Math.random() * fourTasks.length)];
             setTaskName(randomTask.taskName);
             setTaskDescription(randomTask.taskDescription);
             setShowStopwatch(randomTask.stopwatch || false)
         } else if (dice > 13 && dice < 17) {
             setDiceImage(diceFive);
-            await new Promise(resolve => setTimeout(resolve, 0));
+            await new Promise(resolve => setTimeout(resolve, 50));
             const randomTask = fiveSixTasks[Math.floor(Math.random() * fiveSixTasks.length)];
             setTaskName(randomTask.taskName);
             setTaskDescription(randomTask.taskDescription);
             setShowStopwatch(randomTask.stopwatch || false)
         } else if (dice > 16 && dice < 19) {
             setDiceImage(diceSix);
-            await new Promise(resolve => setTimeout(resolve, 0));
+            await new Promise(resolve => setTimeout(resolve, 50));
             const randomTask = fiveSixTasks[Math.floor(Math.random() * fiveSixTasks.length)];
             setTaskName(randomTask.taskName);
             setTaskDescription(randomTask.taskDescription);
@@ -119,13 +119,13 @@ export default function Boardgame() {
             const randomTask = extraTasks[Math.floor(Math.random() * extraTasks.length)]
             if(randomTask.taskName === "Казино рояль") {
                 setDiceImage(superThree)
-                await new Promise(resolve => setTimeout(resolve, 0))
+                await new Promise(resolve => setTimeout(resolve, 50))
                 setTaskName(randomTask.taskName);
                 setTaskDescription(randomTask.taskDescription);
                 setShowStopwatch(randomTask.stopwatch || false)
             } else if(randomTask.taskName === "Кто хочет стать миллионером?") {
                 setDiceImage(superFive)
-                await new Promise(resolve => setTimeout(resolve, 0))
+                await new Promise(resolve => setTimeout(resolve, 50))
                 setTaskName(randomTask.taskName);
                 setTaskDescription(randomTask.taskDescription);
                 setShowStopwatch(randomTask.stopwatch || false)
