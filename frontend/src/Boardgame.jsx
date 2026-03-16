@@ -23,12 +23,9 @@ import Stopwatch from "./Stopwatch"
 
 export default function Boardgame() {
     const [diceImage, setDiceImage] = useState(diceOne)
-    const [taskName, setTaskName] = useState("")
-    const [taskDescription, setTaskDescription] = useState("")
+    const [taskData, setTaskData] = useState({name: "", description: "", showStopwatch: false})
     const [isDarkTheme, setIsDarkTheme] = useState(false)
-    const [showStopwatch, setShowStopwatch] = useState(false)
     const [players, setPlayers] = useState([])
-    const [diceRolled, setDiceRolled]  = useState(false)
     const navigate = useNavigate()
 
     const API_URL = process.env.NODE_ENV === "production" 
@@ -71,108 +68,146 @@ export default function Boardgame() {
     function rollDice() {
         fetchPlayers()
         const dice = Math.floor(Math.random() * 19) + 1;
-        
+
+        let newDiceImage;
+        let taskArray;
+
         if (dice > 0 && dice < 4) {
-            setDiceImage(diceOne);
-            setDiceRolled(true)
-            useEffect(() => {
-                if(diceRolled) {
-                    const randomTask = oneTasks[Math.floor(Math.random() * oneTasks.length)];
-                    setTaskName(randomTask.taskName);
-                    setTaskDescription(randomTask.taskDescription);
-                    setShowStopwatch(randomTask.stopwatch || false)
-                    setDiceRolled(false)
-                }
-            }, [diceImage, diceRolled])
+            newDiceImage = diceOne;
+            taskArray = oneTasks;
         } else if (dice > 3 && dice < 7) {
-            setDiceImage(diceTwo);
-            setDiceRolled(true)
-            useEffect(() => {
-                if(diceRolled) {
-                    const randomTask = oneTasks[Math.floor(Math.random() * twoThreeTasks.length)];
-                    setTaskName(randomTask.taskName);
-                    setTaskDescription(randomTask.taskDescription);
-                    setShowStopwatch(randomTask.stopwatch || false)
-                    setDiceRolled(false)
-                }
-            }, [diceImage, diceRolled])
+            newDiceImage = diceTwo;
+            taskArray = twoThreeTasks;
         } else if (dice > 6 && dice < 10) {
-            setDiceImage(diceThree);
-            setDiceRolled(true)
-            useEffect(() => {
-                if(diceRolled) {
-                    const randomTask = oneTasks[Math.floor(Math.random() * twoThreeTasks.length)];
-                    setTaskName(randomTask.taskName);
-                    setTaskDescription(randomTask.taskDescription);
-                    setShowStopwatch(randomTask.stopwatch || false)
-                    setDiceRolled(false)
-                }
-            }, [diceImage, diceRolled])
-        } else if (dice > 9 && dice < 14) {
-            setDiceImage(diceFour);
-            setDiceRolled(true)
-            useEffect(() => {
-                if(diceRolled) {
-                    const randomTask = oneTasks[Math.floor(Math.random() * fourTasks.length)];
-                    setTaskName(randomTask.taskName);
-                    setTaskDescription(randomTask.taskDescription);
-                    setShowStopwatch(randomTask.stopwatch || false)
-                    setDiceRolled(false)
-                }
-            }, [diceImage, diceRolled])
-        } else if (dice > 13 && dice < 17) {
-            setDiceImage(diceFive);
-            setDiceRolled(true)
-            useEffect(() => {
-                if(diceRolled) {
-                    const randomTask = oneTasks[Math.floor(Math.random() * fiveSixTasks.length)];
-                    setTaskName(randomTask.taskName);
-                    setTaskDescription(randomTask.taskDescription);
-                    setShowStopwatch(randomTask.stopwatch || false)
-                    setDiceRolled(false)
-                }
-            }, [diceImage, diceRolled])
-        } else if (dice > 16 && dice < 19) {
-            setDiceImage(diceSix);
-            setDiceRolled(true)
-            useEffect(() => {
-                if(diceRolled) {
-                    const randomTask = oneTasks[Math.floor(Math.random() * fiveSixTasks.length)];
-                    setTaskName(randomTask.taskName);
-                    setTaskDescription(randomTask.taskDescription);
-                    setShowStopwatch(randomTask.stopwatch || false)
-                    setDiceRolled(false)
-                }
-            }, [diceImage, diceRolled])
+            newDiceImage = diceThree;
+            taskArray = twoThreeTasks;
+        } else if (dice > 9 && dice < 13) {
+            newDiceImage = diceFour;
+            taskArray = fourTasks;
+        } else if (dice > 12 && dice < 16) {
+            newDiceImage = diceFive;
+            taskArray = fiveSixTasks;
+        } else if (dice > 15 && dice < 19) {
+            newDiceImage = diceSix;
+            taskArray = fiveSixTasks;
         } else if (dice === 19) {
-            
-            
-            const randomTask = extraTasks[Math.floor(Math.random() * extraTasks.length)]
+            const randomTask = extraTasks[Math.floor(Math.random() * extraTasks.length)];
             if(randomTask.taskName === "Казино рояль") {
-                setDiceImage(superThree)
-                setDiceRolled(true)
-                useEffect(() => {
-                if(diceRolled) {
-                    setTaskName(randomTask.taskName);
-                    setTaskDescription(randomTask.taskDescription);
-                    setShowStopwatch(randomTask.stopwatch || false)
-                    setDiceRolled(false)
-                }
-                }, [diceImage, diceRolled])
-            } else if(randomTask.taskName === "Кто хочет стать миллионером?") {
-                setDiceImage(superFive)
-                setDiceRolled(true)
-                useEffect(() => {
-                if(diceRolled) {
-                    const randomTask = oneTasks[Math.floor(Math.random() * twoThreeTasks.length)];
-                    setTaskName(randomTask.taskName);
-                    setTaskDescription(randomTask.taskDescription);
-                    setShowStopwatch(randomTask.stopwatch || false)
-                    setDiceRolled(false)
-                }
-                }, [diceImage, diceRolled])
+                newDiceImage = superThree;
+            } else {
+                newDiceImage = superFive;
             }
+            taskArray = [randomTask];
         }
+
+        setDiceImage(newDiceImage)
+
+        if (taskArray) {
+            const randomTask = taskArray[Math.floor(Math.random() * taskArray.length)];
+            setTaskData({name: randomTask.taskName, description: randomTask.taskDescription, showStopwatch: randomTask.stopwatch || false})
+        }
+        
+    //     if (dice > 0 && dice < 4) {
+    //         setDiceImage(diceOne);
+    //         setDiceRolled(true)
+    //         useEffect(() => {
+    //             if(diceRolled) {
+    //                 const randomTask = oneTasks[Math.floor(Math.random() * oneTasks.length)];
+    //                 setTaskName(randomTask.taskName);
+    //                 setTaskDescription(randomTask.taskDescription);
+    //                 setShowStopwatch(randomTask.stopwatch || false)
+    //                 setDiceRolled(false)
+    //             }
+    //         }, [diceImage, diceRolled])
+    //     } else if (dice > 3 && dice < 7) {
+    //         setDiceImage(diceTwo);
+    //         setDiceRolled(true)
+    //         useEffect(() => {
+    //             if(diceRolled) {
+    //                 const randomTask = oneTasks[Math.floor(Math.random() * twoThreeTasks.length)];
+    //                 setTaskName(randomTask.taskName);
+    //                 setTaskDescription(randomTask.taskDescription);
+    //                 setShowStopwatch(randomTask.stopwatch || false)
+    //                 setDiceRolled(false)
+    //             }
+    //         }, [diceImage, diceRolled])
+    //     } else if (dice > 6 && dice < 10) {
+    //         setDiceImage(diceThree);
+    //         setDiceRolled(true)
+    //         useEffect(() => {
+    //             if(diceRolled) {
+    //                 const randomTask = oneTasks[Math.floor(Math.random() * twoThreeTasks.length)];
+    //                 setTaskName(randomTask.taskName);
+    //                 setTaskDescription(randomTask.taskDescription);
+    //                 setShowStopwatch(randomTask.stopwatch || false)
+    //                 setDiceRolled(false)
+    //             }
+    //         }, [diceImage, diceRolled])
+    //     } else if (dice > 9 && dice < 14) {
+    //         setDiceImage(diceFour);
+    //         setDiceRolled(true)
+    //         useEffect(() => {
+    //             if(diceRolled) {
+    //                 const randomTask = oneTasks[Math.floor(Math.random() * fourTasks.length)];
+    //                 setTaskName(randomTask.taskName);
+    //                 setTaskDescription(randomTask.taskDescription);
+    //                 setShowStopwatch(randomTask.stopwatch || false)
+    //                 setDiceRolled(false)
+    //             }
+    //         }, [diceImage, diceRolled])
+    //     } else if (dice > 13 && dice < 17) {
+    //         setDiceImage(diceFive);
+    //         setDiceRolled(true)
+    //         useEffect(() => {
+    //             if(diceRolled) {
+    //                 const randomTask = oneTasks[Math.floor(Math.random() * fiveSixTasks.length)];
+    //                 setTaskName(randomTask.taskName);
+    //                 setTaskDescription(randomTask.taskDescription);
+    //                 setShowStopwatch(randomTask.stopwatch || false)
+    //                 setDiceRolled(false)
+    //             }
+    //         }, [diceImage, diceRolled])
+    //     } else if (dice > 16 && dice < 19) {
+    //         setDiceImage(diceSix);
+    //         setDiceRolled(true)
+    //         useEffect(() => {
+    //             if(diceRolled) {
+    //                 const randomTask = oneTasks[Math.floor(Math.random() * fiveSixTasks.length)];
+    //                 setTaskName(randomTask.taskName);
+    //                 setTaskDescription(randomTask.taskDescription);
+    //                 setShowStopwatch(randomTask.stopwatch || false)
+    //                 setDiceRolled(false)
+    //             }
+    //         }, [diceImage, diceRolled])
+    //     } else if (dice === 19) {
+            
+            
+    //         const randomTask = extraTasks[Math.floor(Math.random() * extraTasks.length)]
+    //         if(randomTask.taskName === "Казино рояль") {
+    //             setDiceImage(superThree)
+    //             setDiceRolled(true)
+    //             useEffect(() => {
+    //             if(diceRolled) {
+    //                 setTaskName(randomTask.taskName);
+    //                 setTaskDescription(randomTask.taskDescription);
+    //                 setShowStopwatch(randomTask.stopwatch || false)
+    //                 setDiceRolled(false)
+    //             }
+    //             }, [diceImage, diceRolled])
+    //         } else if(randomTask.taskName === "Кто хочет стать миллионером?") {
+    //             setDiceImage(superFive)
+    //             setDiceRolled(true)
+    //             useEffect(() => {
+    //             if(diceRolled) {
+    //                 const randomTask = oneTasks[Math.floor(Math.random() * twoThreeTasks.length)];
+    //                 setTaskName(randomTask.taskName);
+    //                 setTaskDescription(randomTask.taskDescription);
+    //                 setShowStopwatch(randomTask.stopwatch || false)
+    //                 setDiceRolled(false)
+    //             }
+    //             }, [diceImage, diceRolled])
+    //         }
+    //     }
     }
 
     return (
@@ -191,12 +226,13 @@ export default function Boardgame() {
             <div id="dice-container">
                 <img src={diceImage}/>
             </div>
-            <div id="task-name">{taskName}</div>
-            <div id="task-description">{taskDescription}</div>
-            {showStopwatch && <Stopwatch />}
+            <div id="task-name">{taskData.name}</div>
+            <div id="task-description">{taskData.description}</div>
+            {taskData.showStopwatch && <Stopwatch />}
         </div>
         </>
     )
 
 }
+
 
