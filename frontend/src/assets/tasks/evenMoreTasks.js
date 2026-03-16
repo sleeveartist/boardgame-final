@@ -20,3 +20,5 @@ const evenMoreTasks = [
         taskDescription: "Игрок с наибольшим количеством промилле получает два очка."
     }
 ]
+
+export default evenMoreTasks

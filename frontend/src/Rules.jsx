@@ -4,7 +4,7 @@ import oneTasks from "./assets/tasks/oneTasks"
 import twoThreeTasks from "./assets/tasks/twoThreeTasks"
 import fourTasks from "./assets/tasks/fourTasks"
 import fiveSixTasks from "./assets/tasks/fiveSixTasks.jsx"
-import extraTasks from "./assets/tasks/extraTasks"
+import evenMoreTasks from "./assets/tasks/evenMoreTasks"
 import diceOne from "./assets/pics/one.png"
 import diceTwo from "./assets/pics/two.png"
 import diceThree from "./assets/pics/three.png"
@@ -52,6 +52,12 @@ export default function Rules() {
                     <img src={diceSix} alt="" />
                 </div>
                 {fiveSixTasks.map((task) => (
+                    <div key={task.id}>
+                        <h3>{task.taskName}</h3>
+                        <p>{task.taskDescription}</p>
+                    </div>
+                ))}
+                {evenMoreTasks.map((task) => (
                     <div key={task.id}>
                         <h3>{task.taskName}</h3>
                         <p>{task.taskDescription}</p>
