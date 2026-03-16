@@ -12,7 +12,7 @@ const fiveSixTasks = [
         stopwatch: false
     },
     {
-        taskName: "От раннего к позднему",
+        taskName: "От раннего к позднему (или от меньшего к большему)",
         taskDescription: "Дается пять явлений или событий. Твоя задача разложить их от самого раннего к позднему.",
         stopwatch: false
     },
