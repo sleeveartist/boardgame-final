@@ -28,6 +28,7 @@ export default function Boardgame() {
     const [isDarkTheme, setIsDarkTheme] = useState(false)
     const [showStopwatch, setShowStopwatch] = useState(false)
     const [players, setPlayers] = useState([])
+    const [diceRolled, setDiceRolled]  = useState(false)
     const navigate = useNavigate()
 
     const API_URL = process.env.NODE_ENV === "production" 
@@ -67,68 +68,109 @@ export default function Boardgame() {
         navigate("/rules")
     }
     
-    async function rollDice() {
+    function rollDice() {
         fetchPlayers()
         const dice = Math.floor(Math.random() * 19) + 1;
         
         if (dice > 0 && dice < 4) {
             setDiceImage(diceOne);
-            await new Promise(resolve => setTimeout(resolve, 50));
-            const randomTask = oneTasks[Math.floor(Math.random() * oneTasks.length)];
-            setTaskName(randomTask.taskName);
-            setTaskDescription(randomTask.taskDescription);
-            setShowStopwatch(randomTask.stopwatch || false)
+            setDiceRolled(true)
+            useEffect(() => {
+                if(diceRolled) {
+                    const randomTask = oneTasks[Math.floor(Math.random() * oneTasks.length)];
+                    setTaskName(randomTask.taskName);
+                    setTaskDescription(randomTask.taskDescription);
+                    setShowStopwatch(randomTask.stopwatch || false)
+                    setDiceRolled(false)
+                }
+            }, [diceImage, diceRolled])
         } else if (dice > 3 && dice < 7) {
             setDiceImage(diceTwo);
-            await new Promise(resolve => setTimeout(resolve, 50));
-            const randomTask = twoThreeTasks[Math.floor(Math.random() * twoThreeTasks.length)];
-            setTaskName(randomTask.taskName);
-            setTaskDescription(randomTask.taskDescription);
-            setShowStopwatch(randomTask.stopwatch || false)
+            setDiceRolled(true)
+            useEffect(() => {
+                if(diceRolled) {
+                    const randomTask = oneTasks[Math.floor(Math.random() * twoThreeTasks.length)];
+                    setTaskName(randomTask.taskName);
+                    setTaskDescription(randomTask.taskDescription);
+                    setShowStopwatch(randomTask.stopwatch || false)
+                    setDiceRolled(false)
+                }
+            }, [diceImage, diceRolled])
         } else if (dice > 6 && dice < 10) {
             setDiceImage(diceThree);
-            await new Promise(resolve => setTimeout(resolve, 50));
-            const randomTask = twoThreeTasks[Math.floor(Math.random() * twoThreeTasks.length)];
-            setTaskName(randomTask.taskName);
-            setTaskDescription(randomTask.taskDescription);
-            setShowStopwatch(randomTask.stopwatch || false)
+            setDiceRolled(true)
+            useEffect(() => {
+                if(diceRolled) {
+                    const randomTask = oneTasks[Math.floor(Math.random() * twoThreeTasks.length)];
+                    setTaskName(randomTask.taskName);
+                    setTaskDescription(randomTask.taskDescription);
+                    setShowStopwatch(randomTask.stopwatch || false)
+                    setDiceRolled(false)
+                }
+            }, [diceImage, diceRolled])
         } else if (dice > 9 && dice < 14) {
             setDiceImage(diceFour);
-            await new Promise(resolve => setTimeout(resolve, 50));
-            const randomTask = fourTasks[Math.floor(Math.random() * fourTasks.length)];
-            setTaskName(randomTask.taskName);
-            setTaskDescription(randomTask.taskDescription);
-            setShowStopwatch(randomTask.stopwatch || false)
+            setDiceRolled(true)
+            useEffect(() => {
+                if(diceRolled) {
+                    const randomTask = oneTasks[Math.floor(Math.random() * fourTasks.length)];
+                    setTaskName(randomTask.taskName);
+                    setTaskDescription(randomTask.taskDescription);
+                    setShowStopwatch(randomTask.stopwatch || false)
+                    setDiceRolled(false)
+                }
+            }, [diceImage, diceRolled])
         } else if (dice > 13 && dice < 17) {
             setDiceImage(diceFive);
-            await new Promise(resolve => setTimeout(resolve, 50));
-            const randomTask = fiveSixTasks[Math.floor(Math.random() * fiveSixTasks.length)];
-            setTaskName(randomTask.taskName);
-            setTaskDescription(randomTask.taskDescription);
-            setShowStopwatch(randomTask.stopwatch || false)
+            setDiceRolled(true)
+            useEffect(() => {
+                if(diceRolled) {
+                    const randomTask = oneTasks[Math.floor(Math.random() * fiveSixTasks.length)];
+                    setTaskName(randomTask.taskName);
+                    setTaskDescription(randomTask.taskDescription);
+                    setShowStopwatch(randomTask.stopwatch || false)
+                    setDiceRolled(false)
+                }
+            }, [diceImage, diceRolled])
         } else if (dice > 16 && dice < 19) {
             setDiceImage(diceSix);
-            await new Promise(resolve => setTimeout(resolve, 50));
-            const randomTask = fiveSixTasks[Math.floor(Math.random() * fiveSixTasks.length)];
-            setTaskName(randomTask.taskName);
-            setTaskDescription(randomTask.taskDescription);
-            setShowStopwatch(randomTask.stopwatch || false)
+            setDiceRolled(true)
+            useEffect(() => {
+                if(diceRolled) {
+                    const randomTask = oneTasks[Math.floor(Math.random() * fiveSixTasks.length)];
+                    setTaskName(randomTask.taskName);
+                    setTaskDescription(randomTask.taskDescription);
+                    setShowStopwatch(randomTask.stopwatch || false)
+                    setDiceRolled(false)
+                }
+            }, [diceImage, diceRolled])
         } else if (dice === 19) {
             
             
             const randomTask = extraTasks[Math.floor(Math.random() * extraTasks.length)]
             if(randomTask.taskName === "Казино рояль") {
                 setDiceImage(superThree)
-                await new Promise(resolve => setTimeout(resolve, 50))
-                setTaskName(randomTask.taskName);
-                setTaskDescription(randomTask.taskDescription);
-                setShowStopwatch(randomTask.stopwatch || false)
+                setDiceRolled(true)
+                useEffect(() => {
+                if(diceRolled) {
+                    setTaskName(randomTask.taskName);
+                    setTaskDescription(randomTask.taskDescription);
+                    setShowStopwatch(randomTask.stopwatch || false)
+                    setDiceRolled(false)
+                }
+                }, [diceImage, diceRolled])
             } else if(randomTask.taskName === "Кто хочет стать миллионером?") {
                 setDiceImage(superFive)
-                await new Promise(resolve => setTimeout(resolve, 50))
-                setTaskName(randomTask.taskName);
-                setTaskDescription(randomTask.taskDescription);
-                setShowStopwatch(randomTask.stopwatch || false)
+                setDiceRolled(true)
+                useEffect(() => {
+                if(diceRolled) {
+                    const randomTask = oneTasks[Math.floor(Math.random() * twoThreeTasks.length)];
+                    setTaskName(randomTask.taskName);
+                    setTaskDescription(randomTask.taskDescription);
+                    setShowStopwatch(randomTask.stopwatch || false)
+                    setDiceRolled(false)
+                }
+                }, [diceImage, diceRolled])
             }
         }
     }
