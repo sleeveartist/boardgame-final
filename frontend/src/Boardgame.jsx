@@ -104,7 +104,9 @@ export default function Boardgame() {
 
         if (taskArray) {
             const randomTask = taskArray[Math.floor(Math.random() * taskArray.length)];
-            setTaskData({name: randomTask.taskName, description: randomTask.taskDescription, showStopwatch: randomTask.stopwatch || false})
+            setTimeout(() => {
+                setTaskData({name: randomTask.taskName, description: randomTask.taskDescription, showStopwatch: randomTask.stopwatch || false})
+            }, 1000)
         }
         
     //     if (dice > 0 && dice < 4) {
