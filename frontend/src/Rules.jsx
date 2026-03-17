@@ -57,6 +57,7 @@ export default function Rules() {
                         <p>{task.taskDescription}</p>
                     </div>
                 ))}
+                <h1>***</h1>
                 {evenMoreTasks.map((task) => (
                     <div key={task.id}>
                         <h3>{task.taskName}</h3>
