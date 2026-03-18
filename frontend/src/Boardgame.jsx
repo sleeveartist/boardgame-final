@@ -132,8 +132,8 @@ export default function Boardgame() {
                     <p>{player.player}: {player.points}; </p>
                 ))}
             </div>
-            <div id="dice-container">
-                <img src={diceImage}/>
+            <div id="dice-container" className={easterEgg ? "creators-container" : ""}>
+                <img src={diceImage} alt="dice"/>
             </div>
             <div id="task-name">{taskData.name}</div>
             <div id="task-description">{taskData.description}</div>

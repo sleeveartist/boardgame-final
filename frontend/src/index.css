@@ -91,6 +91,13 @@ body.dark-theme {
   width: 10rem;
 }
 
+.creators-container img {
+    width: 25rem; /* Larger size for creators image */
+    height: auto;
+    border-radius: 8px; /* Optional: add some styling */
+    box-shadow: 0 0 5px gold; /* Optional: add glow effect */
+}
+
 #task-name {
   margin-top: 2rem;
   font-size: 2.5rem;
