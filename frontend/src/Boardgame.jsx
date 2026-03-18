@@ -115,7 +115,7 @@ export default function Boardgame() {
             const randomTask = taskArray[Math.floor(Math.random() * taskArray.length)];
             setTimeout(() => {
                 setTaskData({name: randomTask.taskName, description: randomTask.taskDescription, showStopwatch: randomTask.stopwatch || false})
-            }, 300)
+            }, 500)
         }
     }
 
