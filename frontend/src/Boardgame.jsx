@@ -133,7 +133,7 @@ export default function Boardgame() {
                 ))}
             </div>
             <div id="dice-container">
-                <img src={diceImage} alt="dice" style={easterEgg ? { width: '25rem', height: 'auto' } : {}}/>
+                <img src={diceImage} alt="dice" style={easterEgg ? { width: '25rem', height: 'auto', borderRadius: '8px', boxShadow: '0 0 5px gold' } : {}}/>
             </div>
             <button onClick={() => setEasterEgg(true)}>trigger ee</button>
             <div id="task-name">{taskData.name}</div>
