@@ -1,7 +1,7 @@
 import {useState, useEffect, useRef} from "react";
 import "./index.css"
 
-function Stopwatch() {
+function Stopwatch({onEasterEgg}) {
     const [seconds, setSeconds] = useState(0);
     const [decimalSeconds, setDecimalSeconds] = useState(0);
     const [hundredths, setHundredths] = useState(0);
@@ -51,6 +51,9 @@ function Stopwatch() {
 
     const stopTime = () => {
         setIsActive(false);
+        if (seconds === 13 && decimalSeconds === 3 && hundredths === 7) {
+            onEasterEgg();
+        }
     }
 
     return (

@@ -16,6 +16,7 @@ import darkBeer from "./assets/pics/darkbeer.png"
 import lightBeer from "./assets/pics/lightbeer.png"
 import book1 from "./assets/pics/book.png"
 import book2 from "./assets/pics/book-borderless.png"
+import creators from "./assets/pics/creators1.jpg"
 import { useNavigate, Link } from "react-router-dom"
 import { useState, useEffect } from "react"
 import axios from "axios"
@@ -26,6 +27,7 @@ export default function Boardgame() {
     const [taskData, setTaskData] = useState({name: "", description: "", showStopwatch: false})
     const [isDarkTheme, setIsDarkTheme] = useState(false)
     const [players, setPlayers] = useState([])
+    const [easterEgg, setEasterEgg] = useState(false)
     const navigate = useNavigate()
 
     const API_URL = process.env.NODE_ENV === "production" 
@@ -35,6 +37,13 @@ export default function Boardgame() {
     useEffect(() => {
         fetchPlayers();
     }, []);
+
+    useEffect(() =>{
+        if(easterEgg) {
+            setDiceImage(creators)
+            setTaskData({name: "Создатели игры", description: "Стронгер, Вальяж, Гамбит, Монах, Владимир", showStopwatch: false})
+        }
+    }, [easterEgg])
 
     const fetchPlayers = async () => {
         try {
@@ -128,7 +137,7 @@ export default function Boardgame() {
             </div>
             <div id="task-name">{taskData.name}</div>
             <div id="task-description">{taskData.description}</div>
-            {taskData.showStopwatch && <Stopwatch />}
+            {taskData.showStopwatch && <Stopwatch onEasterEgg={() => setEasterEgg(true)}/>}
         </div>
         </>
     )
