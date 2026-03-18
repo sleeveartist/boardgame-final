@@ -115,7 +115,7 @@ export default function Boardgame() {
             const randomTask = taskArray[Math.floor(Math.random() * taskArray.length)];
             setTimeout(() => {
                 setTaskData({name: randomTask.taskName, description: randomTask.taskDescription, showStopwatch: randomTask.stopwatch || false})
-            }, 500)
+            }, 300)
         }
     }
 
@@ -135,7 +135,6 @@ export default function Boardgame() {
             <div id="dice-container">
                 <img src={diceImage} alt="dice" style={easterEgg ? { width: '25rem', height: 'auto', borderRadius: '8px', boxShadow: '0 0 5px gold' } : {}}/>
             </div>
-            <button onClick={() => setEasterEgg(true)}>trigger ee</button>
             <div id="task-name">{taskData.name}</div>
             <div id="task-description">{taskData.description}</div>
             {taskData.showStopwatch && <Stopwatch onEasterEgg={() => setEasterEgg(true)}/>}
