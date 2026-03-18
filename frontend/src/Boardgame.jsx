@@ -132,8 +132,8 @@ export default function Boardgame() {
                     <p>{player.player}: {player.points}; </p>
                 ))}
             </div>
-            <div id="dice-container" className={easterEgg ? "creators-container" : ""}>
-                <img src={diceImage} alt="dice"/>
+            <div id="dice-container">
+                <img src={diceImage} alt="dice" style={easterEgg ? { width: '25rem', height: 'auto' } : {}}/>
             </div>
             <button onClick={() => setEasterEgg(true)}>trigger ee</button>
             <div id="task-name">{taskData.name}</div>
