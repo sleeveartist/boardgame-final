@@ -135,6 +135,7 @@ export default function Boardgame() {
             <div id="dice-container" className={easterEgg ? "creators-container" : ""}>
                 <img src={diceImage} alt="dice"/>
             </div>
+            <button onClick={() => setEasterEgg(true)}>trigger ee</button>
             <div id="task-name">{taskData.name}</div>
             <div id="task-description">{taskData.description}</div>
             {taskData.showStopwatch && <Stopwatch onEasterEgg={() => setEasterEgg(true)}/>}
